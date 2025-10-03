@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('SOAR Security Alerts') }}
+            {{ __('Monitoring Security Alerts') }}
         </h2>
     </x-slot>
 
@@ -50,38 +50,37 @@
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                                 @foreach ($alerts as $alert)
-                                    {{-- INI BARIS UTAMA ALERT --}}
                                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50" x-data="{ open: false }">
 
                                         {{-- KOLOM WAKTU --}}
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                                            {{ \Carbon\Carbon::parse($alert['attack_time'])->diffForHumans() }}
-                                            <div class="text-xs">
-                                                {{ \Carbon\Carbon::parse($alert['attack_time'])->format('d M H:i:s') }}
-                                            </div>
+                                            {{-- Menggunakan Carbon dari Eloquent untuk memformat waktu --}}
+                                            {{ $alert->attack_time->diffForHumans() }}
+                                            <div class="text-xs">{{ $alert->attack_time->format('d M H:i:s') }}</div>
                                         </td>
 
                                         {{-- KOLOM JUDUL --}}
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm font-medium text-red-600 dark:text-red-400">
-                                            {{ $alert['alert_title'] }}
+                                            {{ $alert->alert_title }}
+                                            <span class="ml-2 text-xs font-semibold text-gray-500">
+                                                (Lvl: {{ $alert->severity_level }})
+                                            </span>
                                         </td>
 
                                         {{-- KOLOM PATH --}}
                                         <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100 max-w-xs">
-                                            {{-- max-w-xs membantu membatasi lebar teks dalam sel --}}
                                             <code
-                                                class="text-xs bg-gray-100 dark:bg-gray-700 p-1 rounded whitespace-pre-wrap break-words">{{ $alert['attack_path'] }}</code>
-                                            {{-- break-words untuk path yang sangat panjang --}}
+                                                class="text-xs bg-gray-100 dark:bg-gray-700 p-1 rounded whitespace-pre-wrap break-words">{{ $alert->attack_path }}</code>
                                         </td>
 
-                                        {{-- KOLOM REKOMENDASI (Dengan Alpine.js) --}}
+                                        {{-- KOLOM REKOMENDASI --}}
                                         <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
                                             <div class="flex items-center">
                                                 {{-- Ringkasan --}}
                                                 <p class="text-xs">
-                                                    {{ \Illuminate\Support\Str::limit($alert['gemini_recommendation'], 80) }}
+                                                    {{ \Illuminate\Support\Str::limit($alert->gemini_recommendation, 80) }}
                                                 </p>
 
                                                 {{-- Tombol Detail/Sembunyikan --}}
@@ -92,12 +91,12 @@
                                                 </button>
                                             </div>
 
-                                            {{-- DETAIL LENGKAP REKOMENDASI (DISOROT DENGAN ALPINE) --}}
+                                            {{-- DETAIL LENGKAP REKOMENDASI --}}
                                             <div x-show="open" x-collapse.duration.500ms
                                                 class="mt-2 p-3 bg-indigo-50 dark:bg-indigo-900/50 rounded-lg border-l-4 border-indigo-500">
                                                 <p class="font-semibold text-sm mb-1 text-gray-800 dark:text-gray-200">
                                                     Rekomendasi Lengkap Gemini:</p>
-                                                <pre class="text-xs whitespace-pre-wrap text-gray-700 dark:text-gray-300">{{ $alert['gemini_recommendation'] }}</pre>
+                                                <pre class="text-xs whitespace-pre-wrap text-gray-700 dark:text-gray-300">{{ $alert->gemini_recommendation }}</pre>
                                             </div>
                                         </td>
                                     </tr>
