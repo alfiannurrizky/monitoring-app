@@ -92,7 +92,7 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
-      - db-data-development:/var/lib/mysql
+      - monitoring-app_dbdata:/var/lib/mysql
     networks:
       - monitoring-app-development
 
@@ -101,4 +101,4 @@ networks:
     driver: bridge
 
 volumes:
-  db-data-development:
+  monitoring-app_dbdata:
