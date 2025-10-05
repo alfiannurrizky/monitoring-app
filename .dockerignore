@@ -3,6 +3,7 @@
 
 docker-compose.yml
 docker-compose.*.yml
+compose.*.yml
 
 docker/*/Dockerfile
 
@@ -32,6 +33,3 @@ phpunit.xml
 
 README.md
 *.md
-
-!docker/php/local.ini
-!docker/nginx/default.conf
