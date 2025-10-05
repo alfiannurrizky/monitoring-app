@@ -102,3 +102,4 @@ networks:
 
 volumes:
   monitoring-app_dbdata:
+    name: monitoring-app_dbdata
