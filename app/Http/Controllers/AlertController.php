@@ -19,4 +19,15 @@ class AlertController extends Controller
             'alertsByDomain' => $alertsByDomain,
         ]);
     }
+
+    public function destroy(SoarAlert $alert)
+    {
+        try {
+            $alert->delete();
+            return redirect()->route('alerts.detail')->with('success', 'Alert berhasil dihapus.');
+
+        } catch (\Exception $e) {
+            return redirect()->route('alerts.detail')->with('error', 'Gagal menghapus alert: ' . $e->getMessage());
+        }
+    }
 }

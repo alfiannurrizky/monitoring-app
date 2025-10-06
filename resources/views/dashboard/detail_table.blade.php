@@ -54,6 +54,10 @@
                                     <th
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-6/12">
                                         Rekomendasi AI</th>
+                                    <th
+                                        class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                                        AKSI</th>
+                                </tr>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -97,6 +101,19 @@
                                                     Lihat Detail
                                                 </button>
                                             </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                            {{-- Form untuk mengirim permintaan DELETE ke route alerts.destroy --}}
+                                            <form action="{{ route('alerts.destroy', $alert->id) }}" method="POST"
+                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus alert ini? Aksi ini tidak dapat dibatalkan.');">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button type="submit"
+                                                    class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-600 transition duration-150">
+                                                    Hapus
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
