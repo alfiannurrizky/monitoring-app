@@ -11,16 +11,11 @@ class AlertController extends Controller
 {
     public function index()
     {
-        // 1. Ambil Data dari Database
-        // Mengambil semua alert, diurutkan berdasarkan waktu serangan terbaru
         $allAlerts = SoarAlert::orderBy('attack_time', 'desc')->get();
 
-        // 2. Kelompokkan Data Berdasarkan Domain
-        // Hasilnya adalah Collection yang dikelompokkan: ['domain1' => [Alert, Alert], 'domain2' => [Alert]]
         $alertsByDomain = $allAlerts->groupBy('domain');
 
-        // 3. Kirim Data ke View
-        return view('dashboard', [
+        return view('dashboard.detail_table', [
             'alertsByDomain' => $alertsByDomain,
         ]);
     }
