@@ -102,8 +102,8 @@
                                                 </button>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                            {{-- Form untuk mengirim permintaan DELETE ke route alerts.destroy --}}
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium"
+                                            class="delete-form">
                                             <form action="{{ route('alerts.destroy', $alert->id) }}" method="POST"
                                                 onsubmit="return confirm('Apakah Anda yakin ingin menghapus alert ini? Aksi ini tidak dapat dibatalkan.');">
                                                 @csrf

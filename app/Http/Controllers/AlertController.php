@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Models\SoarAlert;
 use Carbon\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AlertController extends Controller
 {
@@ -24,7 +25,10 @@ class AlertController extends Controller
     {
         try {
             $alert->delete();
-            return redirect()->route('alerts.detail')->with('success', 'Alert berhasil dihapus.');
+
+            toast('Penghapusan Berhasil', 'success');
+            return redirect()->route('alerts.detail');
+
 
         } catch (\Exception $e) {
             return redirect()->route('alerts.detail')->with('error', 'Gagal menghapus alert: ' . $e->getMessage());
