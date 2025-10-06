@@ -14,7 +14,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [OverviewController::class, 'index'])->name('dashboard');
 
     Route::get('/alerts/detail', [AlertController::class, 'index'])->name('alerts.detail');
-    Route::delete('/alerts/{alert}', [AlertController::class, 'destroy'])->name('alerts.destroy');
+    Route::delete('/alerts/{alert}', [AlertController::class, 'destroy'])->middleware('permission:delete alert')->name('alerts.destroy');
 
 });
 

@@ -54,9 +54,11 @@
                                     <th
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-6/12">
                                         Rekomendasi AI</th>
-                                    <th
-                                        class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
-                                        AKSI</th>
+                                    @can('delete alert')
+                                        <th
+                                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                                            AKSI</th>
+                                    @endcan
                                 </tr>
                                 </tr>
                             </thead>
@@ -102,25 +104,27 @@
                                                 </button>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium"
-                                            class="delete-form">
-                                            <form action="{{ route('alerts.destroy', $alert->id) }}" method="POST"
-                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus alert ini? Aksi ini tidak dapat dibatalkan.');">
-                                                @csrf
-                                                @method('DELETE')
+                                        @can('delete alert')
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium"
+                                                class="delete-form">
+                                                <form action="{{ route('alerts.destroy', $alert->id) }}" method="POST"
+                                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus alert ini? Aksi ini tidak dapat dibatalkan.');">
+                                                    @csrf
+                                                    @method('DELETE')
 
-                                                <button type="submit"
-                                                    class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-600 transition duration-150">
-                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M19 7l-.86 12.04A2 2 0 0116.14 21H7.86A2 2 0 016 19.04L5 7m5 4v6m4-6v6m1-10H8" />
-                                                    </svg>
-                                                </button>
+                                                    <button type="submit"
+                                                        class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-600 transition duration-150">
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M19 7l-.86 12.04A2 2 0 0116.14 21H7.86A2 2 0 016 19.04L5 7m5 4v6m4-6v6m1-10H8" />
+                                                        </svg>
+                                                    </button>
 
-                                            </form>
-                                        </td>
+                                                </form>
+                                            </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>

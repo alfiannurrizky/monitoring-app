@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use App\Models\SoarAlert;
 use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
 
 class AlertController extends Controller
 {
@@ -23,6 +24,10 @@ class AlertController extends Controller
 
     public function destroy(SoarAlert $alert)
     {
+        if (!Auth::user() || !Auth::user()->hasRole('admin')) {
+            abort(403, 'Anda tidak punya izin untuk menghapus data ini.');
+        }
+
         try {
             $alert->delete();
 
