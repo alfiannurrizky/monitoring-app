@@ -50,7 +50,7 @@
                                         Judul</th>
                                     <th
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">
-                                        Path Diserang</th>
+                                        Lokasi Anomali</th>
                                     <th
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-6/12">
                                         Rekomendasi AI</th>
